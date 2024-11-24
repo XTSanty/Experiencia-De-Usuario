@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Material Prestado</title>
+    <link rel="icon" type="image/png" href="Logo.png">
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a; /* Fondo oscuro */
+            color: #20ebd0; /* Texto claro */
+        }
+
+        header {
+            background-color: #290b46d0; /* Morado */
+            color: white;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #4edbef; /* Azul-verde */
+            padding: 10px;
+        }
+
+        nav a {
+            color: rgb(24, 21, 21);
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            background-color: #2f2f2f; /* Fondo oscuro para la caja */
+            padding: 30px;
+            margin: 40px auto;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        h2 {
+            color: #8a2be2; /* Morado */
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #0f0e0e; /* Color texto en la tabla */
+        }
+
+        th, td {
+            padding: 15px;
+            border-bottom: 1px solid #444; /* Borde gris oscuro */
+        }
+
+        th {
+            background-color: #4edbef; /* Azul-verde */
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        td {
+            color: #ddd; /* Texto gris claro en las celdas */
+        }
+
+        tr:nth-child(even) {
+            background-color: #333; /* Fila alterna con fondo oscuro */
+        }
+
+        input[type="text"], input[type="date"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #444; /* Borde gris oscuro */
+            border-radius: 5px;
+            background-color: #333; /* Fondo oscuro para los campos */
+            color: #dddddd; /* Texto claro */
+        }
+
+        button {
+            background-color: #290b46d0; /* Morado */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #33084ec9; /* Morado oscuro */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Material Prestado</h1>
+</header>
+
+<nav>
+    <a href="1- Registro.html">Registro</a>
+    <a href="2- Login.html">Login</a>
+    <a href="3- Sobre nosotros.html">Sobre Nosotros</a>
+    <a href="4- Agregar Metodo.html">Agregar Método</a>
+    <a href="5- Contacto.html">Contacto</a>
+    <a href="6- Recargas anteriores.html">Recargas</a>
+    <a href="7- Pagina de descuentos.html">Descuentos</a>
+    <a href="8- Material prestado de la universidad.html">Material</a>
+    <a href="9- Mapa de la universidad.html">Mapa</a>
+    <a href="10- Novedades.html">Novedades</a>
+</nav>
+
+<div class="content">
+    <h2>Lista de Materiales</h2>
+    <form id="material-form">
+        <div class="form-group">
+            <label for="material">Material</label>
+            <input type="text" id="material" placeholder="Ingrese el material" required>
+        </div>
+        <div class="form-group">
+            <label for="date">Fecha de Devolución</label>
+            <input type="date" id="date" required>
+        </div>
+        <div class="form-group">
+            <label for="location">Lugar</label>
+            <input type="text" id="location" placeholder="Ingrese el lugar" required>
+        </div>
+        <button type="submit">Agregar Material</button>
+    </form>
+
+    <h3>Materiales Prestados</h3>
+    <table id="materials-table">
+        <thead>
+            <tr>
+                <th>Material</th>
+                <th>Fecha de Devolución</th>
+                <th>Lugar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Los materiales se agregarán aquí dinámicamente -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    const form = document.getElementById('material-form');
+    const tableBody = document.getElementById('materials-table').getElementsByTagName('tbody')[0];
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Obtener los datos del formulario
+        const material = document.getElementById('material').value;
+        const date = document.getElementById('date').value;
+        const location = document.getElementById('location').value;
+
+        // Crear una nueva fila para la tabla
+        const row = tableBody.insertRow();
+        row.innerHTML = `
+            <td>${material}</td>
+            <td>${date}</td>
+            <td>${location}</td>
+        `;
+
+        // Limpiar el formulario
+        form.reset();
+    });
+</script>
+
+</body>
+</html>
