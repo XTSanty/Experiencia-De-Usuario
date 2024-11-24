@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recargas - Card Plus</title>
+    <link rel="icon" type="image/png" href="Logo.png">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #4edbef, #96fc43); 
+            /* Fondo degradado de azul a verde */
+            color: #333;
+            height: 100vh; /* Aseguramos que el body ocupe toda la altura de la ventana */
+            margin: 0; /* Eliminamos márgenes por defecto */
+            display: flex; /* Usamos flexbox para alinear el contenido */
+            justify-content: center; /* Centramos el contenido horizontalmente */
+            align-items: flex-start; /* Alineamos los elementos al principio (arriba) */
+            flex-direction: column; /* Apilamos los elementos verticalmente */
+        }
+
+        header {
+            background-color: #88e254;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%; /* Aseguramos que el header ocupe todo el ancho */
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #2326db;
+            padding: 10px;
+            width: 100%; /* Aseguramos que el nav ocupe todo el ancho */
+        }
+
+        nav a {
+            color: rgb(255, 255, 255); /* Color blanco para los enlaces */
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid white; /* Borde blanco de 2px */
+            padding: 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: white;
+            background-color: #4edbef;
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            margin: 30px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%; /* Aseguramos que la caja ocupe todo el ancho disponible */
+            margin-top: 80px; /* Agregamos margen superior para separar la barra de navegación */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #2326db;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #86f12f; /* Color verde al pasar el cursor */
+        }
+
+        .card-item button {
+            background-color: #f4a261;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .card-item button.show {
+            background-color: #2a9d8f;
+        }
+
+        .card-item button.delete {
+            background-color: #e76f51;
+        }
+
+        .card-item button:hover {
+            background-color: #e76f51;
+        }
+
+        .card-info {
+            display: none;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .recargas-history {
+            margin-top: 30px;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Card Plus - Historial de Recargas</h1>
+</header>
+
+<nav>
+    <a href="1- Registro.html">Registro</a>
+    <a href="2- Login.html">Login</a>
+    <a href="3- Sobre nosotros.html">Sobre Nosotros</a>
+    <a href="4- Agregar Metodo.html">Agregar Método</a>
+    <a href="5- Contacto.html">Contacto</a>
+    <a href="6- Recargas anteriores.html">Recargas</a>
+    <a href="7- Pagina de descuentos.html">Descuentos</a>
+    <a href="8- Material prestado de la universidad.html">Material</a>
+    <a href="9- Mapa de la universidad.html">Mapa</a>
+    <a href="10- Novedades.html">Novedades</a>
+</nav>
+
+<div class="container">
+    <h2>Realizar Recarga</h2>
+    <form id="recarga-form">
+        <input type="text" id="recarga-card-number" placeholder="Número de tarjeta" required>
+        <input type="number" id="recarga-monto" placeholder="Monto a recargar" required>
+        <button type="submit">Realizar Recarga</button>
+    </form>
+
+    <div class="card-list" id="card-list">
+        <h3>Tarjetas Guardadas</h3>
+        <!-- Listado de tarjetas se agregará aquí -->
+    </div>
+
+    <div class="recargas-history">
+        <h3>Historial de Recargas</h3>
+        <button onclick="sortRecargas(true)">Orden Ascendente</button>
+        <button onclick="sortRecargas(false)">Orden Descendente</button>
+
+        <table id="recargas-table">
+            <thead>
+                <tr>
+                    <th>Número de Tarjeta</th>
+                    <th>Monto</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí irán las recargas almacenadas dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    // Variables globales
+    const recargas = [];
+    const cardList = document.getElementById('card-list');
+    const recargaForm = document.getElementById('recarga-form');
+    const recargasTable = document.getElementById('recargas-table').querySelector('tbody');
+
+    // Función para mostrar tarjetas guardadas
+    function displayCards() {
+        const savedCards = JSON.parse(localStorage.getItem('savedCards')) || [];
+
+        cardList.innerHTML = ''; // Limpiar el listado de tarjetas guardadas
+        savedCards.forEach(card => {
+            const cardItem = document.createElement('div');
+            cardItem.classList.add('card-item');
+            cardItem.innerHTML = `
+                <strong>Tarjeta de: ${card.name}</strong><br>
+                <span>Número: ${card.number}</span>
+                <div class="card-info">
+                    <p>Fecha de vencimiento: ${card.expiry}</p>
+                    <p>CVV: ${card.cvv}</p>
+                </div>
+                <button class="show">Mostrar Datos</button>
+                <button class="hide">Ocultar Datos</button>
+                <button class="delete">Eliminar</button>
+            `;
+
+            // Agregar la tarjeta al listado
+            cardList.appendChild(cardItem);
+
+            // Mostrar/Ocultar detalles de la tarjeta
+            const showButton = cardItem.querySelector('.show');
+            const hideButton = cardItem.querySelector('.hide');
+            const cardInfo = cardItem.querySelector('.card-info');
+            const deleteButton = cardItem.querySelector('.delete');
+
+            showButton.addEventListener('click', () => {
+                cardInfo.style.display = 'block';
+                showButton.style.display = 'none';
+                hideButton.style.display = 'inline-block';
+            });
+
+            hideButton.addEventListener('click', () => {
+                cardInfo.style.display = 'none';
+                showButton.style.display = 'inline-block';
+                hideButton.style.display = 'none';
+            });
+
+            // Eliminar tarjeta
+            deleteButton.addEventListener('dblclick', () => {
+                const updatedCards = savedCards.filter(savedCard => savedCard.number !== card.number);
+                localStorage.setItem('savedCards', JSON.stringify(updatedCards));
+                displayCards();
+            });
+        });
+    }
+
+    // Agregar tarjeta de pago al almacenamiento
+    function storeCard(card) {
+        const savedCards = JSON.parse(localStorage.getItem('savedCards')) || [];
+        savedCards.push(card);
+        localStorage.setItem('savedCards', JSON.stringify(savedCards));
+    }
+
+    // Mostrar recargas almacenadas
+    function displayRecargas() {
+        recargasTable.innerHTML = '';
+        recargas.forEach(recarga => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${recarga.cardNumber}</td>
+                <td>${recarga.amount}</td>
+                <td>${recarga.date}</td>
+                <td>${recarga.time}</td>
+                <td>${recarga.status}</td>
+            `;
+            recargasTable.appendChild(row);
+        });
+    }
+
+    // Almacenamos recarga y mostramos alerta
+    recargaForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const cardNumber = document.getElementById('recarga-card-number').value;
+        const amount = document.getElementById('recarga-monto').value;
+
+        const recarga = {
+            cardNumber: cardNumber,
+            amount: amount,
+            date: new Date().toLocaleDateString(),
+            time: new Date().toLocaleTimeString(),
+            status: 'Aprobada',
+        };
+
+        recargas.push(recarga);
+
+        // Mostrar recargas
+        displayRecargas();
+
+        // Mostrar alertas
+        alert("Recarga hecha correctamente");
+        alert("Recarga Reflejandose al sistema");
+
+        // Limpiar el formulario
+        recargaForm.reset();
+    });
+
+    // Ordenar recargas
+    function sortRecargas(ascending) {
+        recargas.sort((a, b) => {
+            const dateA = new Date(`${a.date} ${a.time}`);
+            const dateB = new Date(`${b.date} ${b.time}`);
+            return ascending ? dateA - dateB : dateB - dateA;
+        });
+
+        // Mostrar las recargas nuevamente después de ordenar
+        displayRecargas();
+    }
+
+    // Inicializar página
+    displayCards();
+    displayRecargas();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+Colores RGB
+
+Verde: #86f12f
+Azul: #4edbef
+
+Mapa de la universidad:
+https://www.4icu.org/maps/mx/16244-universidad-tecnologica-de-santa-catarina/

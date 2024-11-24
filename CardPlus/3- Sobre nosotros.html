@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nosotros - Card Plus</title>
+    <link rel="icon" type="image/png" href="Logo.png">
+    <style> 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #333333, #1a1a1a); 
+            color: #f0f0f0;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #222222;
+            color: #4edbef;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #0a0b47;
+            padding: 10px;
+            width: 100%;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid white;
+            padding: 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: white;
+            background-color: #4edbef;
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: #252525;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        h2 {
+            color: #4edbef;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .about-section {
+            margin-bottom: 30px;
+        }
+
+        .columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .column {
+            flex: 1;
+            min-width: 250px;
+            background-color: #333333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .column h3 {
+            color: #6ac0a6cc;
+            margin-bottom: 15px;
+        }
+
+        .column p {
+            text-align: justify;
+            line-height: 1.6;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #168a54;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Card Plus - Sobre Nosotros</h1>
+</header>
+
+<nav>
+    <a href="1- Registro.html">Registro</a>
+    <a href="2- Login.html">Login</a>
+    <a href="3- Sobre nosotros.html">Sobre Nosotros</a>
+    <a href="4- Agregar Metodo.html">Agregar Método</a>
+    <a href="5- Contacto.html">Contacto</a>
+    <a href="6- Recargas anteriores.html">Recargas</a>
+    <a href="7- Pagina de descuentos.html">Descuentos</a>
+    <a href="8- Material prestado de la universidad.html">Material</a>
+    <a href="9- Mapa de la universidad.html">Mapa</a>
+    <a href="10- Novedades.html">Novedades</a>
+</nav>
+
+<div class="container">
+    <div class="about-section">
+        <center>
+        <h2>Nuestra Historia</h2>
+        <p>El proyecto CardPlus nace como una iniciativa para crear una tarjeta universitaria innovadora que combine tanto los aspectos físicos como digitales. El objetivo es ofrecer a los estudiantes una plataforma integrada que permita realizar pagos, gestionar recompensas y estar conectados con otros estudiantes y actividades de la universidad.</p>
+    </div>
+
+    <div class="about-section">
+        <h2>Nuestros Valores</h2>
+        <div class="columns">
+            <div class="column">
+                <h3>Innovación</h3>
+                <p>Nos dedicamos a la creación de soluciones digitales que mejoren la experiencia universitaria mediante el uso de tecnología avanzada.</p>
+            </div>
+            <div class="column">
+                <h3>Integridad</h3>
+                <p>Trabajamos con honestidad y compromiso para garantizar la transparencia y confianza en nuestros servicios.</p>
+            </div>
+            <div class="column">
+                <h3>Excelencia</h3>
+                <p>Nos esforzamos por alcanzar los más altos estándares en el desarrollo de nuestra plataforma y en la atención a nuestros usuarios.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="about-section">
+        <h2>Nuestro Equipo</h2>
+        <div class="columns">
+            <div class="column">
+                <h3>Ernesto Solís Ramírez</h3>
+                <p>Diseñador UX/UI, encargado de la creación y diseño de la interfaz de usuario, asegurando que sea amigable y eficiente para los estudiantes.</p>
+            </div>
+            <div class="column">
+                <h3>Sergio Fabian Emerich Benitez Santiago</h3>
+                <p>Desarrollador Frontend, encargado de implementar el diseño y las funcionalidades en la página web, asegurando que el sistema sea accesible y fácil de usar.</p>
+            </div>
+            <div class="column">
+                <h3>Oscar Andres Nuñez Martinez</h3>
+                <p>Project Manager, responsable de la coordinación general del proyecto, asegurando que todas las etapas se ejecuten de manera eficiente y dentro de los plazos establecidos.</p>
+            </div>
+            <div class="column">
+                <h3>Eduardo Ortega Fonseca</h3>
+                <p>Analista de Funcionalidades, encargado de evaluar y definir las funcionalidades clave del sistema, asegurando que cumpla con las necesidades del usuario.</center></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

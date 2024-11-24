@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Método de Pago</title>
+    <link rel="icon" type="image/png" href="Logo.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #4edbef;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #86f12f;
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            margin: 40px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #4edbef;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #007bff;
+        }
+
+        .card-list {
+            margin-top: 30px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-item button {
+            background-color: #f4a261;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .card-item button.show {
+            background-color: #2a9d8f;
+        }
+
+        .card-item button.delete {
+            background-color: #e76f51;
+        }
+
+        .card-item button:hover {
+            background-color: #e76f51;
+        }
+
+        .card-info {
+            display: none;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Agregar Método de Pago</h1>
+</header>
+
+<nav>
+    <a href="1- Registro.html">Registro</a>
+    <a href="2- Login.html">Login</a>
+    <a href="3- Sobre nosotros.html">Sobre Nosotros</a>
+    <a href="4- Agregar Metodo.html">Agregar Método</a>
+    <a href="5- Contacto.html">Contacto</a>
+    <a href="6- Recargas anteriores.html">Recargas</a>
+    <a href="7- Pagina de descuentos.html">Descuentos</a>
+    <a href="8- Material prestado de la universidad.html">Material</a>
+    <a href="9- Mapa de la universidad.html">Mapa</a>
+    <a href="10- Novedades.html">Novedades</a>
+</nav>
+
+<div class="container">
+    <h2>Detalles del Método de Pago</h2>
+    <form id="payment-form">
+        <input type="text" id="card-number" placeholder="Número de tarjeta" required>
+        <input type="text" id="card-name" placeholder="Nombre en la tarjeta" required>
+        <input type="text" id="expiry-date" placeholder="Fecha de vencimiento (MM/AA)" required>
+        <input type="text" id="cvv" placeholder="CVV" maxlength="3" required oninput="validateCVV()">
+        <button type="submit">Guardar</button>
+    </form>
+
+    <div class="card-list" id="card-list">
+        <h3>Tarjetas Guardadas</h3>
+        <!-- Listado de tarjetas se agregará aquí -->
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById('payment-form');
+    const cardList = document.getElementById('card-list');
+
+    // Función para validar el CVV (solo 3 dígitos)
+    function validateCVV() {
+        const cvvInput = document.getElementById('cvv');
+        if (cvvInput.value.length > 3) {
+            cvvInput.value = cvvInput.value.slice(0, 3); // Limitar a 3 dígitos
+        }
+    }
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Obtener los datos del formulario
+        const cardNumber = document.getElementById('card-number').value;
+        const cardName = document.getElementById('card-name').value;
+        const expiryDate = document.getElementById('expiry-date').value;
+        const cvv = document.getElementById('cvv').value;
+
+        // Crear un nuevo contenedor para la tarjeta
+        const cardItem = document.createElement('div');
+        cardItem.classList.add('card-item');
+
+        cardItem.innerHTML = `
+            <strong>Tarjeta de: ${cardName}</strong><br>
+            <span>Número: ${cardNumber.substring(0, 4)} **** **** ****</span>
+            <div class="card-info">
+                <p>Fecha de vencimiento: ${expiryDate}</p>
+                <p>CVV: ${cvv}</p>
+            </div>
+            <button class="show">Mostrar Datos</button>
+            <button class="hide">Ocultar Datos</button>
+            <button class="delete">Eliminar</button>
+        `;
+
+        // Agregar la tarjeta al listado
+        cardList.appendChild(cardItem);
+
+        // Limpiar el formulario
+        form.reset();
+
+        // Mostrar el mensaje de éxito
+        alert("Pago realizado con éxito");
+
+        // Manejar la visualización de los datos
+        const showButton = cardItem.querySelector('.show');
+        const hideButton = cardItem.querySelector('.hide');
+        const cardInfo = cardItem.querySelector('.card-info');
+        const deleteButton = cardItem.querySelector('.delete');
+
+        showButton.addEventListener('click', function() {
+            cardInfo.style.display = 'block';
+            showButton.style.display = 'none';
+            hideButton.style.display = 'inline-block';
+        });
+
+        hideButton.addEventListener('click', function() {
+            cardInfo.style.display = 'none';
+            showButton.style.display = 'inline-block';
+            hideButton.style.display = 'none';
+        });
+
+        deleteButton.addEventListener('dblclick', function() {
+            cardItem.remove();
+        });
+
+        hideButton.style.display = 'none';
+    });
+</script>
+
+</body>
+</html>
